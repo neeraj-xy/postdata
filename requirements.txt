@@ -1,3 +1,4 @@
+Flask-WTF==0.14.2
 flask
 selenium
 wtforms
