@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.secret_key = '79138462'
 
 baseUrl1 = "https://zerodha.com/open-account?c=ZMPTJT"
+# https://zerodha.com/account/registration.php
 baseUrl2 = "https://www.5paisa.com/open-demat-account/?referralcode=56199111"
 baseUrl3 = "https://upstox.com/open-account/?f=AX6O"
 
@@ -26,14 +27,14 @@ def test():
     WINDOW_SIZE = "1920,1080"
 
     chrome_options = Options()  
-    chrome_options.add_argument("--headless")  
+    # chrome_options.add_argument("--headless")  
     chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
 
     # for MAC
     try:
         CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
         PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-        DRIVER_BIN = os.path.join(PROJECT_ROOT, "/Users/neeraj/Desktop/working/chromedriver")
+        DRIVER_BIN = os.path.join(PROJECT_ROOT, "chromedriver")
         chrome_options.binary_location = CHROME_PATH
         driver = webdriver.Chrome(executable_path = DRIVER_BIN, chrome_options = chrome_options)
 
@@ -45,42 +46,42 @@ def test():
         dir_path = os.getcwd() + '\chromedriver.exe'
         driver =  webdriver.Chrome(executable_path = dir_path, chrome_options = chrome_options)
 
-    # driver.get(baseUrl1)
-    # wname =  driver.find_element_by_name('user_name')
-    # wmobile =  driver.find_element_by_name('user_mobile')
-    # wemail = driver.find_element_by_name('user_email')
-    # wname.clear()
-    # wname.send_keys(name)
-    # wmobile.clear()
-    # wmobile.send_keys(phone)
-    # wemail.clear()
-    # wemail.send_keys(email)
-    # openButton = driver.find_element_by_xpath('//*[@id="open_account_proceed_form"]')
-    # openButton.click()
+    driver.get(baseUrl1)
+    wname =  driver.find_element_by_name('user_name')
+    wmobile =  driver.find_element_by_name('user_mobile')
+    wemail = driver.find_element_by_name('user_email')
+    wname.clear()
+    wname.send_keys(name)
+    wmobile.clear()
+    wmobile.send_keys(phone)
+    wemail.clear()
+    wemail.send_keys(email)
+    openButton = driver.find_element_by_xpath('//*[@id="open_account_proceed_form"]')
+    openButton.click()
 
-    # time.sleep(10)
+    time.sleep(10)
 
-    # driver.get(baseUrl2)
-    # wname =  driver.find_element_by_name('ClientName')
-    # wmobile =  driver.find_element_by_name('MobileNo')
-    # wemail = driver.find_element_by_name('UserName')
-    # wpass = driver.find_element_by_name('Password')
-    # wname.clear()
-    # wname.send_keys(name)
-    # wmobile.clear()
-    # wmobile.send_keys(phone)
-    # wemail.clear()
-    # wemail.send_keys(email)
-    # wpass.clear()
-    # wpass.send_keys(password)
-    # wcheck1 = driver.find_element_by_xpath('//*[contains(text(), "I prefer South Indian language.")]')
-    # wcheck1.click()
-    # wcheck2 = driver.find_element_by_xpath('//*[contains(text(), "I agree that I have read & accept the ")]')
-    # wcheck2.click()
-    # regButton = driver.find_element_by_xpath('//*[@id="Register"]')
-    # regButton.click()
+    driver.get(baseUrl2)
+    wname =  driver.find_element_by_name('ClientName')
+    wmobile =  driver.find_element_by_name('MobileNo')
+    wemail = driver.find_element_by_name('UserName')
+    wpass = driver.find_element_by_name('Password')
+    wname.clear()
+    wname.send_keys(name)
+    wmobile.clear()
+    wmobile.send_keys(phone)
+    wemail.clear()
+    wemail.send_keys(email)
+    wpass.clear()
+    wpass.send_keys(password)
+    wcheck1 = driver.find_element_by_xpath('//*[contains(text(), "I prefer South Indian language.")]')
+    wcheck1.click()
+    wcheck2 = driver.find_element_by_xpath('//*[contains(text(), "I agree that I have read & accept the ")]')
+    wcheck2.click()
+    regButton = driver.find_element_by_xpath('//*[@id="Register"]')
+    regButton.click()
 
-    # time.sleep(15)
+    time.sleep(15)
 
     driver.get(baseUrl3)
     wemail = driver.find_element_by_xpath('//*[@id="txtemail"]')
@@ -118,4 +119,4 @@ def contact():
    return render_template('contact.html', form = form)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
